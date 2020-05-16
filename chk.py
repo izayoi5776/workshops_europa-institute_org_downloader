@@ -1,5 +1,6 @@
 # coding: UTF-8
 import urllib.request, urllib.error
+from multiprocessing import Pool
 
 def tryUrl(n):
   ret = True
@@ -10,15 +11,16 @@ def tryUrl(n):
     urllib.request.urlopen(url)
   except Exception:
     ret = False
-  return ret
+  return [n, ret]
 
 def doMain(start):
-  for n in range(start, 99999):
-    if tryUrl(n):
-      with open("good.txt", "ab") as fg:
-        fg.write((str(n) + "\n").encode())
-    with open("num.txt", "wb") as fn:
-      fn.write((str(n)).encode())
+  with Pool(1) as p:
+    for [n, ret] in p.imap(tryUrl, range(start, 99999)): 
+      if ret:
+        with open("good.txt", "ab") as fg:
+          fg.write((str(n) + "\n").encode())
+      with open("num.txt", "wb") as fn:
+        fn.write((str(n)).encode())
 
 # ------------------- MAIN -----------------
 '''
@@ -33,10 +35,10 @@ Stop
 Restart
   re-run with num.txt in same directory
 '''
-
-try:
-  with open("num.txt", "rb") as fn:
-    start = int(fn.read().decode())
-except Exception as e:
-    start = 0
-doMain(start)
+if __name__ == '__main__':
+  try:
+    with open("num.txt", "rb") as fn:
+      start = int(fn.read().decode())
+  except Exception as e:
+      start = 0
+  doMain(start)

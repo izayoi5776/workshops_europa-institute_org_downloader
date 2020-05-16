@@ -13,3 +13,19 @@
   
 ### Restart
   re-run with num.txt in same directory
+  * not very correct when in multi-process mode
+
+### Multi-process
+  change line 17, Pool(n) as you need
+  
+Ex
+
+before
+```python
+with Pool(1) as p:
+```
+
+after
+```python
+with Pool(2) as p:  
+```
