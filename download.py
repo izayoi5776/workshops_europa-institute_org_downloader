@@ -58,7 +58,7 @@ if __name__ == '__main__':
   except Exception as ex:
     print(ex)
 
-  for i in range(0, len(start)-2):
+  for i in range(0, len(start)-1):
     try:
       fm = int(start[int(i)])
       to = int(start[int(i)+1])
