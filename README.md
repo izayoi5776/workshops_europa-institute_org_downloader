@@ -3,12 +3,20 @@
 ### Propose
   chk url(https://workshops.europa-institute.org/mirador/n) exists one by one
   
+
+### Install
+
+```bash
+pip install Pillow
+
+```
+
 ### Usage
 
 ```bash
 python3 chk.py            # search for book start point, save to good.txt
 python3 downloadJson.py   # download json for books in good.txt
-python3 downloadImage.py  # download image for books in good.txt
+python3 downloadImage.py  # download image for books in good.txt, now it can download and merge image from parts
 ```
   
 ### Monitoring result
